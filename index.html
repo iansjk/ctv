@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CTV demo </title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron.css" rel="stylesheet">
+    
+
+	<script type="text/javascript" src="Scripts/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<!--<script src="http://malsup.github.com/jquery.form.js"></script>-->
+    <script type="text/javascript" src="Scripts/script.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">	
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript" language="javascript" src="Scripts/jsme.nocache.js"></script>
+	<script>
+    //this function will be called after the JavaScriptApplet code has been loaded.
+    function jsmeOnLoad() {
+        jsmeApplet = new JSApplet.JSME("jsme_container", "350px", "290px");
+		document.JME = jsmeApplet;
+   }
+   function getSmiles() {
+        var data = document.JME.smiles();
+        document.getElementById("compoundNames").value = data;
+       }
+</script>
+<script type="text/javascript">
+        $(document).ready(function(event) {
+            $('#form1').ajaxForm(function(data) {
+                //$('#result').html(data);
+				$('#ctvInfo').replaceWith(data);
+				//$('#select_check').css("display", "block");
+            });
+        });
+  </script>  
+
+
+	
+	
+  </head>
+
+    <body>
+    <div id="results" title="Results">
+	<div id="resultss" title="Results">
+    <p></p>
+    </div>
+	</div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://comptox.us/ctvdemo/">Project CTV</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="http://comptox.us/ctvdemo/">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="nav-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form form-inline pull-right">
+            <input type="text" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <button type="submit" class="btn">Sign in</button>
+          </form>
+		  
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+	  <div id="spinner" class="spinner" style="display:none;">
+	     <p align="center">
+         <img id="img-spinner" src="images/ajax-loader.gif" alt="Loading"/>
+		 </p>
+      </div>
+	   <div id="ctvInfo">
+        <h2>PROJECT CTV (BETA)</h2>
+		<p>The Conditional Toxicity Value Predictor is a tool that uses chemical structure properties to predict toxicity values relevant for human health. Specifically, the reference dose (RfD), reference concentration (RfC), oral slope factor (OSF), inhalation unit risk (IUR), or cancer potency value (CPV) can be predicted for compounds or chemicals of interest entered into the tool below. The ability to predict the benchmark dose (BMD) is forthcoming. The tool is currently in development</p>
+        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+       </div>
+	   <div id="reset_check"  style="display:none;">
+	   <p align="right">
+	   <a class="btn btn-default" id="reset_results">Reset</a>
+	   </p>
+	   </div>
+	   
+	   <div id="select_check"  style="display:none; width: 100%;">
+	   <p align="right">
+	   <a class="btn btn-default" id="cancel_search">Cancel</a>
+	   <a class="btn btn-primary btn-customctv" id="enable_check">Select</a>
+	   </p>
+	   </div>
+	   <div id="file_check"  style="display:none; width: 100%;">
+	   <p align="right">
+	   <a class="btn btn-default" id="cancel_file">Cancel</a>
+	   <a class="btn btn-primary btn-customctv" id="enable_model">Continue</a>
+	   </p>
+	   </div>
+	   
+	  </div>
+
+      <div class="body-content">
+
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-lg-4">
+		    <div id="single_compound">
+            <h2>Step 1</h2>
+            <p><b>Enter compound name, CASRN, or SMILES below. Compounds will be searched using <a href="http://www.chemspider.com/" target="_blank">ChemSpider.</a> Mixtures, inorganic compounds, and metallic compounds cannot be predicted by CTV</b></p>
+			
+			
+             <fieldset>
+             <!--<textarea rows="5" cols="28" name="compoundName"></textarea>-->
+			 <textarea rows="3" cols="10" id="compoundNames" class="form-control" placeholder="Enter compound name OR SMILES OR CAS Registry Number"></textarea>
+	
+             
+             <!--<button type="submit" class="btn">Submit</button>-->
+			 <p></p>
+			 <p><button type="submit" id="compoundSearch" class="btn btn-default">Search</button>
+			 <a class="btn btn-default" id="multi_compounds">Multiple compounds</a></p>
+			  </fieldset> 
+			 </div>
+            <div id="inputfile" style="display:none;">
+	
+			 <h2>Step 1</h2>
+             <p><b>Upload a CSV file with a maximum of 10 smile strings. Compounds will NOT be validated, so please ensure smiles strings are accurate. Mixtures, inorganic compounds, and metallic compounds cannot be predicted by CTV</b></p>
+			 <!--<form action="fileValidator.php" id="addForm" name="addForm" method="post" enctype="multipart/form-data">-->
+			 <fieldset>
+             
+			
+             <!--<textarea rows="5" cols="28" name="compoundName"></textarea>-->
+			 <!--<textarea rows="3" cols="10" id="compoundNames" class="form-control" placeholder="Enter compound name OR SMILES OR CAS Registry Number"></textarea>-->
+             <!--<form action="fileValidator.php" id="addForm" name="addForm" method="post" enctype="multipart/form-data">-->
+			 <p></p>
+			 <form id="form1" action="fileValidator.php" method="post" enctype="multipart/form-data" target="uploader_iframe">
+    
+             <input id="file" type="file" name="file" /><br/>
+             <input class="btn btn-default" id="submit" type="submit" value="Submit"/>
+			 <a class="btn btn-default" id="cancel_multiple">Cancel</a></p>
+             </form>
+			
+			 
+			 </fieldset>
+			 <!--</form>-->
+			  </div>
+			
+			
+            
+          </div>
+
+          <div class="col-lg-4" id="step2">
+		  <div id="draw_structure">
+		 <div id="jsme_container"></div>
+         <button type="button" onclick='getSmiles();'>Get smiles</button>
+	     </div>
+         </div>
+          <div id="stepper" class="col-lg-4">
+                      <h2>Step 2</h2>
+            <label id="steptwoinstructions"><b> Select compound above before continuing </b></label>
+			<div id="steptwo" style="display:none;">
+			<p>Select toxicity value. You can select multiple toxicity values </p>
+			<p>Each toxicity value is predicted using QSAR modeling (specifically, Random Forest with CDK and ISIDA descriptors)</p>
+			<input type="checkbox" id="Ref_dose" disabled="disabled" value="Ref_dose1">&nbsp;&nbsp; CTV Reference Dose<br>
+            <input type="checkbox" id="Ref_conc" disabled="disabled" value="Ref_conc1">&nbsp;&nbsp; CTV Reference Concentration<BR>
+	        <input type="checkbox" id="Oral_slope" disabled="disabled" value="Oral_slope1">&nbsp;&nbsp; CTV Oral Slope Factor<br>
+	        <input type="checkbox" id="Ihal_unit" disabled="disabled" value="Ihal_unit1">&nbsp;&nbsp; CTV Inhalation Unit Risk<BR>
+			<input type="checkbox" id="Canc_pot" disabled="disabled" value="Canc_pot1">&nbsp;&nbsp; CTV Cancer Potency Value<BR>
+			<input type="checkbox" id="NOAEL" disabled="disabled" value="NOAEL1">&nbsp;&nbsp; CTV Oral No-Observed-Adverse-Effect-Level<br>
+	        <input type="checkbox" id="ONBD" disabled="disabled" value="ONBD1">&nbsp;&nbsp; CTV Oral Noncancer Benchmark Dose<BR>
+			<input type="checkbox" id="OCBD" disabled="disabled" value="OCBD1">&nbsp;&nbsp; CTV Oral Cancer Benchmark Dose<BR>
+            <p></p>
+            <p><button type="submit" id="Run" class="btn btn-default">Run</button>&nbsp;&nbsp;<i>(Please allow up to 2 mins for the analysis to run)</i></p>
+			</div>
+          </div>
+        </div>
+
+        <hr>
+
+        <footer>
+          <p>&copy; Company 2013</p>
+        </footer>
+      </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
