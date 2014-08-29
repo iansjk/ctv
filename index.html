@@ -39,6 +39,7 @@
             $('#form1').ajaxForm(function(data) {
                 //$('#result').html(data);
 				$('#ctvInfo').replaceWith(data);
+				$('#file_check').css("display", "block");
 				//$('#select_check').css("display", "block");
             });
         });
@@ -195,8 +196,15 @@
 	        <input type="checkbox" id="ONBD" disabled="disabled" value="ONBD1">&nbsp;&nbsp; CTV Oral Noncancer Benchmark Dose<BR>
 			<input type="checkbox" id="OCBD" disabled="disabled" value="OCBD1">&nbsp;&nbsp; CTV Oral Cancer Benchmark Dose<BR>
             <p></p>
+			
+			</div>
+			<div id="scompoundSubmit" style="display:none;">
             <p><button type="submit" id="Run" class="btn btn-default">Run</button>&nbsp;&nbsp;<i>(Please allow up to 2 mins for the analysis to run)</i></p>
 			</div>
+			<div id="mcompoundSubmit" style="display:none;">
+            <p><button type="submit" id="Runfile" class="btn btn-default">Run</button>&nbsp;&nbsp;<i>(Please allow up to 5 mins for the analysis to run)</i></p>
+			</div>
+			
           </div>
         </div>
 

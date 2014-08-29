@@ -129,6 +129,7 @@ $InChI = $result->GetExtendedCompoundInfoResult->InChI;
 		   echo "val=$compoundImage";
 		   echo '>';
 		   echo "$compoundImage</label>";
+		   echo '<label id="submission" style="display:none;">single</label>';
 		   //
            echo '<p></p><p></p></div>';		 
            /*                  

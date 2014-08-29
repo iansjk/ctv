@@ -7,6 +7,7 @@ $dir = "tmp/";
 move_uploaded_file($_FILES["file"]["tmp_name"], $dir. $_FILES["file"]["name"]);
 $file_name = $dir. $_FILES["file"]["name"];
   $mimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
+     echo'<div id="result">';
      $validate = "pass";
      if(in_array($_FILES['file']['type'],$mimes)){
 	 $validate = "pass";
@@ -34,9 +35,13 @@ $file_name = $dir. $_FILES["file"]["name"];
        $msg = "Invalid file format. Please upload csv file";
 }
     if($validate == "pass")
-    $msg = "Multiple compound assesment is undergoing maintenance, please check back later";	
+	{
+      $msg = "Please select continue";	
+	  }
      echo"$msg";
-
+     echo'</div>';
+	 echo '<label id="filename" style="display:none;">';
+		   echo "$file_name</label>";
 ?>
 
 
