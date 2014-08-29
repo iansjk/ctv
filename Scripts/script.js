@@ -31,6 +31,7 @@ $( '#enable_check' ).click( function()
 {
   $('#steptwo').css("display", "block");
   $('#steptwoinstructions').css("display", "none"),
+  $('#scompoundSubmit').css("display", "block"),
   $('#Ref_dose').removeAttr("disabled"),
    $('#Ref_conc').removeAttr("disabled"),
    $('#Oral_slope').removeAttr("disabled"),
@@ -45,6 +46,7 @@ $( '#enable_model' ).click( function()
 {
   $('#steptwo').css("display", "block");
   $('#steptwoinstructions').css("display", "none"),
+  $('#mcompoundSubmit').css("display", "block"),
   $('#Ref_dose').removeAttr("disabled"),
    $('#Ref_conc').removeAttr("disabled"),
    $('#Oral_slope').removeAttr("disabled"),
@@ -77,13 +79,7 @@ $( '#cancel_multiple' ).click( function()
 {
   location.reload(true);
 });
-/*$( '#draw_compound' ).click( function()
-{
-  //$('#step2').css('visibility', 'hidden');
-  //$('#jsmewrap').css("display", "block");
-  //$('#stepone').css("display", "none");
-  //$('#jsme_container').show();
-});*/
+
 $( '#reset_results' ).click( function()
 {
   location.reload(true);
@@ -124,6 +120,7 @@ $("#spinner").bind("ajaxSend", function() {
 	      $.post( "results.php" , 
 		      {
 			     compoundName : $( '#compoundNamer' ).text(),
+				 submitValue : $( '#submission' ).text(),
 				 MolWeight: $( '#Molecularweight').text(),
 			     refDose : $( '#Ref_dose' ).is(":checked"),
 				 refConc : $('#Ref_conc').is(":checked"),
@@ -136,21 +133,51 @@ $("#spinner").bind("ajaxSend", function() {
 				 smilee : $('#smiles').text(),
 				 CompoundImage : $('#compoundImage').text()
 				 
-				 //refConc.val()
 			  } ,
               function( newdata )
 			  {
 			     $('#spinner').hide(),
 				  $('#result').show();
 				  $('#reset_check').css("display", "block");
-				  //$('#reset_check').css("visibility", "visible");
 			     $('#resultss').replaceWith(newdata);
 				 $( '#results' ).dialog( "open" );
-				 //$('#result').replaceWith(newdata);
 			  }
           );
 
 	   });
+	   
+	  $( '#Runfile' ).click( function()
+	  {
+	      $('#result').hide();
+		  $('#file_check').hide();
+	      $('#spinner').show();
+	
+	      $.post( "results.php" , 
+		      {
+			     submitValue : $( '#submission' ).text(),
+				 fileName: $( '#filename' ).text(),
+			     refDose : $( '#Ref_dose' ).is(":checked"),
+				 refConc : $('#Ref_conc').is(":checked"),
+				 oralSlope : $('#Oral_slope').is(":checked"),
+				 ihalUnit : $('#Ihal_unit').is(":checked"),
+				 cancPot : $('#Canc_pot').is(":checked"),
+				 noael : $('#NOAEL').is(":checked"),
+				 onbd : $('#ONBD').is(":checked"),
+				 ocbd : $('#ocbd').is(":checked")
+				 
+			  } ,
+              function( newdata )
+			  {
+			     $('#spinner').hide(),
+				  $('#result').show();
+				  $('#reset_check').css("display", "block");
+			     $('#resultss').replaceWith(newdata);
+				 $( '#results' ).dialog( "open" );
+			  }
+          );
+
+	   });
+	   
 	   
 	   
 	   $("#btnExport").click(function(e) {
