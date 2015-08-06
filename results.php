@@ -640,12 +640,15 @@ $file_location = $_POST['fileName'];
 	  $msg = '';
 	  $data = array();
 	  $compound = array();
-	  $file_handle = fopen("$file_location", "r");
-	  while (($record = fgetcsv($file_handle)) !== FALSE) {
-      $data[] = $record;
-	  $row++;
-      }
-	  fclose($file_handle);
+	  if (!empty($file_location))
+	  {
+	  	$file_handle = fopen("$file_location", "r");
+	  	while (($record = fgetcsv($file_handle)) !== FALSE) {
+      			$data[] = $record;
+	  		$row++;
+      		}
+	  	fclose($file_handle);
+	  }
       for($i = 0; $i < $row; $i++)
 	  {
 	    $compound[$i] = $data[$i][0];
